@@ -10,7 +10,7 @@ services:
       # Treat them as system accounts
       UID: 999
       GID: 999
-      
+
       # General settings
       VERSION: "1.21.8"
       EULA: "TRUE"
@@ -19,6 +19,11 @@ services:
       MEMORY: "6144M"
       USE_MEOWICE_FLAGS: "true"
       SETUP_ONLY: "true"
+      ICON: "/icon.png"
+      OVERRIDE_ICON: true
+
+      # Maintain server seed
+      SEED: "8312171185849629204"
 
       # Game settings
       MAX_PLAYERS: 30
@@ -43,6 +48,7 @@ services:
       SIMULATION_DISTANCE: 3
       VIEW_DISTANCE: 8
       ENABLE_STATUS: "true"
+      ENFORCE_SECURE_PROFILE: "false" # Don't report to mojang
 
     depends_on:
       database:
@@ -54,6 +60,7 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
+      - ./server-icon.png:/icon.png
     restart: always
 
   database:

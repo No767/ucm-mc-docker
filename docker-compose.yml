@@ -1,0 +1,78 @@
+services:
+  mc:
+    container_name: ucm_mc_server
+    image: itzg/minecraft-server:java21
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+    environment:
+      # Treat them as system accounts
+      UID: 999
+      GID: 999
+      
+      # General settings
+      VERSION: "1.21.8"
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      PAPER_CHANNEL: "experimental"
+      MEMORY: "6144M"
+      USE_MEOWICE_FLAGS: "true"
+      SETUP_ONLY: "true"
+
+      # Game settings
+      MAX_PLAYERS: 30
+      MODE: "survival"
+      DIFFICULTY: "hard"
+
+      # Plugins
+      MODRINTH_PROJECTS: |
+        chunky
+        coreprotect
+        distant-horizons-support
+        luckperms
+
+      # Direct plugin sources
+      PLUGINS: |
+        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+
+      # server.properties override 
+      MOTD: "UC MERCED SERVER YAAAAAAY"
+      NETWORK_COMPRESSION_THRESHOLD: 256
+      SIMULATION_DISTANCE: 3
+      VIEW_DISTANCE: 8
+      ENABLE_STATUS: "true"
+
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: mc-health
+      start_period: 1m
+      interval: 5s
+      retries: 20
+    volumes:
+      - "${DATA_LOCATION}:/data"
+    restart: always
+
+  database:
+    container_name: ucm_mc_database
+    image: mariadb:lts-noble
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_AUTO_UPGRADE: ${MARIADB_AUTO_UPGRADE}
+      MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    
+volumes:
+  database:

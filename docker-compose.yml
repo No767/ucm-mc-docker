@@ -29,25 +29,25 @@ services:
         data/plugins/LuckPerms/translations
         
       ENV_VARIABLE_PREFIX: "CFG_"
-      CFG_DB: "mc"
-      CFG_DB_HOST: "database"
+      CFG_DB: mc
+      CFG_DB_HOST: database
       CFG_DB_USER: ${MARIADB_USER}
       CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
 
       # Maintain server seed
-      SEED: "8312171185849629204"
+      # SEED: "8312171185849629204"
 
       # Game settings
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
       WORLD: /worlds
+      FORCE_WORLD_COPY: "true"
 
       # Plugins
       MODRINTH_PROJECTS: |
         chunky
         coreprotect
-        distant-horizons-support
         luckperms
 
       # Direct plugin sources

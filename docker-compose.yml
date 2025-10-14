@@ -41,10 +41,7 @@ services:
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
-      WORLD: |
-        /worlds/world
-        /worlds/world_nether
-        /worlds/world_the_end
+      WORLD: /worlds/world
 
       FORCE_WORLD_COPY: "true"
 
@@ -85,9 +82,7 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${WORLDS_LOCATION}/worlds:/worlds/world"
-      - "${WORLDS_LOCATION}/world_nether:/worlds/world_nether"
-      - "${WORLDS_LOCATION}/world_the_end:/worlds/worlds_the_end"
+      - "${WORLDS_LOCATION}/world:/worlds/world"
       - "./configs:/config"
       - "./mc-plugins:/plugins"
       - "./server-icon.png:/icon.png"

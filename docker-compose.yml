@@ -19,7 +19,7 @@ services:
       MEMORY: "6144M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
-      OVERRIDE_ICON: true
+      OVERRIDE_ICON: "true"
 
       # Environment variables within configs
       REPLACE_ENV_VARIABLES: "true"
@@ -34,20 +34,24 @@ services:
       CFG_DB_USER: ${MARIADB_USER}
       CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
 
+      # Patch both bukkit and spigot configs
+      PATCH_DEFINITIONS: /patches/bukkit-spigot-config.json
+
       # Maintain server seed
-      SEED: "8312171185849629204"
+      # SEED: "8312171185849629204"
 
       # Game settings
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
-      WORLD: /worlds
+      # WORLD: /worlds/world
+
+      FORCE_WORLD_COPY: "true"
 
       # Plugins
       MODRINTH_PROJECTS: |
         chunky
         coreprotect
-        distant-horizons-support
         luckperms
 
       # Direct plugin sources
@@ -57,6 +61,11 @@ services:
 
       # Yes, Noelle is server op
       OPS: |
+        Winter_Melody
+
+      # Whitelists
+      ENABLE_WHITELIST: "true"
+      WHITELIST: |
         Winter_Melody
 
       # server.properties override 
@@ -76,10 +85,11 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${CUSTOM_WORLDS_LOCATION}:/worlds"
-      - ./configs:/config
-      - ./mc-plugins:/plugins
-      - ./server-icon.png:/icon.png
+      # - "${WORLDS_LOCATION}/world:/worlds/world"
+      - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
+      - "./configs:/config"
+      - "./mc-plugins:/plugins"
+      - "./server-icon.png:/icon.png"
     restart: always
 
   database:
@@ -99,6 +109,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    
-volumes:
-  database:
+    volumes:
+      - "${DB_DATA_LOCATION}:/var/lib/mysql:Z"
+    restart: always

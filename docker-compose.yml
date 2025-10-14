@@ -18,9 +18,21 @@ services:
       PAPER_CHANNEL: "experimental"
       MEMORY: "6144M"
       USE_MEOWICE_FLAGS: "true"
-      SETUP_ONLY: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: true
+
+      # Environment variables within configs
+      REPLACE_ENV_VARIABLES: "true"
+      REPLACE_ENV_VARIABLES_EXCLUDES: |
+        data/plugins/Geyser-Spigot/custom-skulls.yml
+        data/plugins/CoreProtect/language.yml
+        data/plugins/LuckPerms/translations
+        
+      ENV_VARIABLE_PREFIX: "CFG_"
+      CFG_DB: mc
+      CFG_DB_HOST: database
+      CFG_DB_USER: ${MARIADB_USER}
+      CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
 
       # Maintain server seed
       SEED: "8312171185849629204"
@@ -29,6 +41,7 @@ services:
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
+      WORLD: /worlds
 
       # Plugins
       MODRINTH_PROJECTS: |
@@ -42,6 +55,10 @@ services:
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
 
+      # Yes, Noelle is server op
+      OPS: |
+        Winter_Melody
+
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
       NETWORK_COMPRESSION_THRESHOLD: 256
@@ -49,7 +66,6 @@ services:
       VIEW_DISTANCE: 8
       ENABLE_STATUS: "true"
       ENFORCE_SECURE_PROFILE: "false" # Don't report to mojang
-
     depends_on:
       database:
         condition: service_healthy
@@ -60,6 +76,9 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
+      - "${CUSTOM_WORLDS_LOCATION}:/worlds"
+      - ./configs:/config
+      - ./mc-plugins:/plugins
       - ./server-icon.png:/icon.png
     restart: always
 

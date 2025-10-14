@@ -85,7 +85,9 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${WORLDS_LOCATION}:/worlds"
+      - "${WORLDS_LOCATION}/worlds:/worlds/world"
+      - "${WORLDS_LOCATION}/world_nether:/worlds/world_nether"
+      - "${WORLDS_LOCATION}/world_the_end:/worlds/worlds_the_end"
       - "./configs:/config"
       - "./mc-plugins:/plugins"
       - "./server-icon.png:/icon.png"

@@ -19,7 +19,7 @@ services:
       MEMORY: "6144M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
-      OVERRIDE_ICON: true
+      OVERRIDE_ICON: "true"
 
       # Environment variables within configs
       REPLACE_ENV_VARIABLES: "true"
@@ -29,8 +29,8 @@ services:
         data/plugins/LuckPerms/translations
         
       ENV_VARIABLE_PREFIX: "CFG_"
-      CFG_DB: mc
-      CFG_DB_HOST: database
+      CFG_DB: "mc"
+      CFG_DB_HOST: "database"
       CFG_DB_USER: ${MARIADB_USER}
       CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
 
@@ -76,10 +76,10 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${CUSTOM_WORLDS_LOCATION}:/worlds"
-      - ./configs:/config
-      - ./mc-plugins:/plugins
-      - ./server-icon.png:/icon.png
+      - "${WORLDS_LOCATION}:/worlds"
+      - "./configs:/config"
+      - "./mc-plugins:/plugins"
+      - "./server-icon.png:/icon.png"
     restart: always
 
   database:

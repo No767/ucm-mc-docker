@@ -99,6 +99,5 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    
-volumes:
-  database:
+    volumes:
+      - "${DB_DATA_LOCATION}:/var/lib/mysql:Z"

@@ -101,3 +101,4 @@ services:
       retries: 3
     volumes:
       - "${DB_DATA_LOCATION}:/var/lib/mysql:Z"
+    restart: always

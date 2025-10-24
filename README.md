@@ -6,7 +6,7 @@ Deployable Docker-based Minecraft instance tailored towards UC Merced's Minecraf
 
 This repository acts as as foundation for deploying the UC Merced Minecraft server. It leverages [Docker](<https://www.docker.com/>) via [itzg/docker-minecraft-server](<https://github.com/itzg/docker-minecraft-server>) to deploy on any machine with minimal setup. Performance has been optimized through [YouHaveTrouble's Optimization Guide](<https://github.com/YouHaveTrouble/minecraft-optimization>) with sensible defaults, and an instance of MariaDB is also attached to allow for high-performance storage of database records
 
-> ![NOTE]
+> [!NOTE]
 > Minecraft Bedrock Edition clients can also join this server
 
 Plugins utilized include:

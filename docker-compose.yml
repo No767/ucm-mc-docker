@@ -27,7 +27,8 @@ services:
         data/plugins/Geyser-Spigot/custom-skulls.yml
         data/plugins/CoreProtect/language.yml
         data/plugins/LuckPerms/translations
-        
+
+      # Environment variables for database connections
       ENV_VARIABLE_PREFIX: "CFG_"
       CFG_DB: mc
       CFG_DB_HOST: database

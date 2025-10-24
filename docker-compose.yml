@@ -86,7 +86,7 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${WORLDS_LOCATION}/world:/worlds/world"
+      - "${WORLDS_LOCATION}:/worlds/world"
       - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
       - "./configs:/config"
       - "./mc-plugins:/plugins"

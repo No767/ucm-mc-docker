@@ -45,7 +45,7 @@ services:
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
-      # WORLD: /worlds/world
+      WORLD: /worlds/world
 
       FORCE_WORLD_COPY: "true"
 
@@ -86,7 +86,7 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      # - "${WORLDS_LOCATION}/world:/worlds/world"
+      - "${WORLDS_LOCATION}/world:/worlds/world"
       - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
       - "./configs:/config"
       - "./mc-plugins:/plugins"

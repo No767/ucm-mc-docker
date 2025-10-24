@@ -15,7 +15,7 @@ Plugins utilized include:
 - [CoreProtect](<https://modrinth.com/plugin/coreprotect>)
 - [Geyser](<https://geysermc.org/>) and [Floodgate](<https://geysermc.org/wiki/floodgate/>)
 
-and support for server-side Distant Horizons has been included through [Distant Horizons Support](<https://modrinth.com/plugin/distant-horizons-support>)
+and support for server-side [Distant Horizons](<https://modrinth.com/mod/distanthorizons>) has been included through [Distant Horizons Support](<https://modrinth.com/plugin/distant-horizons-support>)
 
 ## License
 

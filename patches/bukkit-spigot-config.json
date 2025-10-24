@@ -86,6 +86,13 @@
                         "path": "$.ticks-per.ambient-spawns",
                         "value": 400
                     }
+                },
+                {
+                    "$put": {
+                        "path": "$",
+                        "key": "worlds.world.generator",
+                        "value": "Terra:OVERWORLD"
+                    }
                 }
             ]
         },

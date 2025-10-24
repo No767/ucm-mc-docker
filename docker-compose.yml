@@ -5,7 +5,8 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - "25565:25565"
+      - "25565:25565/tcp"
+      - "19132:19132/udp"
     environment:
       # Treat them as system accounts
       UID: 999
@@ -43,16 +44,18 @@ services:
       # Game settings
       MAX_PLAYERS: 30
       MODE: "survival"
-      DIFFICULTY: "hard"
-      WORLD: /worlds/world
+      DIFFICULTY: "normal"
+      # WORLD: /worlds/world
 
-      FORCE_WORLD_COPY: "true"
+      # FORCE_WORLD_COPY: "true"
 
       # Plugins
       MODRINTH_PROJECTS: |
         chunky
         coreprotect
         luckperms
+        terra:beta
+        viaversion:beta
 
       # Direct plugin sources
       PLUGINS: |
@@ -62,11 +65,12 @@ services:
       # Yes, Noelle is server op
       OPS: |
         Winter_Melody
-
-      # Whitelists
+      
+      # Whitelist
+      WHITELIST_FILE: /whitelist.json
+      ENFORCE_WHITELIST: "true"
       ENABLE_WHITELIST: "true"
-      WHITELIST: |
-        Winter_Melody
+
 
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
@@ -85,10 +89,11 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      - "${WORLDS_LOCATION}/world:/worlds/world"
+      # - "${WORLDS_LOCATION}/world:/worlds/world"
       - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
       - "./configs:/config"
       - "./mc-plugins:/plugins"
+      - "./whitelist.json:/whitelist.json"
       - "./server-icon.png:/icon.png"
     restart: always
 

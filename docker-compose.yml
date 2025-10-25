@@ -12,7 +12,7 @@ services:
       GID: 999
 
       # General settings
-      VERSION: "1.21.10"
+      VERSION: "1.21.8"
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
@@ -45,15 +45,17 @@ services:
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "hard"
-      WORLD: /worlds/world
+      # WORLD: /worlds/world
 
-      FORCE_WORLD_COPY: "true"
+      # FORCE_WORLD_COPY: "true"
 
       # Plugins
       MODRINTH_PROJECTS: |
         chunky
         coreprotect
         luckperms
+        terra:beta
+        viaversion:beta
 
       # Direct plugin sources
       PLUGINS: |

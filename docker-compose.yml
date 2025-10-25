@@ -67,7 +67,7 @@ services:
         Winter_Melody
 
       # Whitelists
-      ENABLE_WHITELIST: "true"
+      ENABLE_WHITELIST: "false"
       WHITELIST: |
         Winter_Melody
 

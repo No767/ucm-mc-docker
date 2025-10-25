@@ -66,11 +66,6 @@ services:
       OPS: |
         Winter_Melody
 
-      # Whitelists
-      ENABLE_WHITELIST: "false"
-      WHITELIST: |
-        Winter_Melody
-
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
       NETWORK_COMPRESSION_THRESHOLD: 256

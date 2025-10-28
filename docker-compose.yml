@@ -66,6 +66,8 @@ services:
       OPS: |
         Winter_Melody
 
+      WHITELIST: /whitelist.json
+
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
       NETWORK_COMPRESSION_THRESHOLD: 256
@@ -87,6 +89,7 @@ services:
       - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
       - "./configs:/config"
       - "./mc-plugins:/plugins"
+      - "./whitelist.json:/whitelist.json"
       - "./server-icon.png:/icon.png"
     restart: always
 

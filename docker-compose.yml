@@ -65,8 +65,12 @@ services:
       # Yes, Noelle is server op
       OPS: |
         Winter_Melody
+      
+      # Whitelist
+      WHITELIST_FILE: /whitelist.json
+      ENFORCE_WHITELIST: "true"
+      ENABLE_WHITELIST: "true"
 
-      WHITELIST: /whitelist.json
 
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"

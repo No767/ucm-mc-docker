@@ -17,7 +17,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "4096M"
+      MEMORY: "6144"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
@@ -45,7 +45,7 @@ services:
       # Game settings
       MAX_PLAYERS: 30
       MODE: "survival"
-      DIFFICULTY: "hard"
+      DIFFICULTY: "normal"
       # WORLD: /worlds/world
 
       # FORCE_WORLD_COPY: "true"

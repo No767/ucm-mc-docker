@@ -17,7 +17,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "6144M"
+      MEMORY: "2048M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
@@ -46,9 +46,6 @@ services:
       MAX_PLAYERS: 30
       MODE: "survival"
       DIFFICULTY: "normal"
-      # WORLD: /worlds/world
-
-      # FORCE_WORLD_COPY: "true"
 
       # Plugins
       MODRINTH_PROJECTS: |
@@ -62,6 +59,7 @@ services:
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+        https://ci.lucko.me/job/spark/504/artifact/spark-bukkit/build/libs/spark-1.10.154-bukkit.jar
 
       # Yes, Noelle is server op
       OPS: |
@@ -71,7 +69,6 @@ services:
       WHITELIST_FILE: /whitelist.json
       ENFORCE_WHITELIST: "true"
       ENABLE_WHITELIST: "true"
-
 
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
@@ -90,11 +87,10 @@ services:
       retries: 20
     volumes:
       - "${DATA_LOCATION}:/data"
-      # - "${WORLDS_LOCATION}/world:/worlds/world"
       - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
+      - "./whitelist.json:/whitelist.json"
       - "./configs:/config"
       - "./mc-plugins:/plugins"
-      - "./whitelist.json:/whitelist.json"
       - "./server-icon.png:/icon.png"
     restart: always
 

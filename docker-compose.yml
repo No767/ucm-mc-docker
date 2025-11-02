@@ -17,7 +17,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "2048M"
+      MEMORY: "6144M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
@@ -74,10 +74,9 @@ services:
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
       NETWORK_COMPRESSION_THRESHOLD: 256
-      SIMULATION_DISTANCE: 8
-      VIEW_DISTANCE: 10
+      SIMULATION_DISTANCE: 6
+      VIEW_DISTANCE: 8
       ENABLE_STATUS: "true"
-      ENFORCE_SECURE_PROFILE: "false" # Don't report to mojang
     depends_on:
       database:
         condition: service_healthy

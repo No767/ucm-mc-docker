@@ -13,7 +13,7 @@
 # Discord: https://discord.gg/papermc
 # Website: https://papermc.io/
 
-_version: 29
+_version: 30
 anticheat:
   obfuscation:
     items:
@@ -63,7 +63,7 @@ item-validation:
     page: 16384
     title: 8192
   book-size:
-    page-max: 2560
+    page-max: 1024
     total-multiplier: 0.98
   display-name: 8192
   lore-line: 8192
@@ -93,7 +93,7 @@ misc:
   strict-advancement-dimension-check: false
   use-alternative-luck-formula: false
   use-dimension-type-for-custom-spawners: false
-  xp-orb-groups-per-area: default
+  xp-orb-groups-per-area: 45
 packet-limiter:
   all-packets:
     action: KICK
@@ -101,7 +101,7 @@ packet-limiter:
     max-packet-rate: 500.0
   kick-message: <red><lang:disconnect.exceeded_packet_rate>
   overrides:
-    ServerboundPlaceRecipePacket:
+    minecraft:place_recipe:
       action: DROP
       interval: 4.0
       max-packet-rate: 5.0

@@ -6,25 +6,25 @@
                 {
                     "$set": {
                         "path": "$.spawn-limits.monsters",
-                        "value": 65
+                        "value": 70
                     }
                 },
                 {
                     "$set": {
                         "path": "$.spawn-limits.animals",
-                        "value": 65
+                        "value": 10
                     }
                 },
                 {
                     "$set": {
                         "path": "$.spawn-limits.water-animals",
-                        "value": 3
+                        "value": 5
                     }
                 },
                 {
                     "$set": {
                         "path": "$.spawn-limits.water-ambient",
-                        "value": 12
+                        "value": 20
                     }
                 },
                 {
@@ -42,7 +42,7 @@
                 {
                     "$set": {
                         "path": "$.spawn-limits.ambient",
-                        "value": 5
+                        "value": 0
                     }
                 },
                 {
@@ -54,7 +54,7 @@
                 {
                     "$set": {
                         "path": "$.ticks-per.monster-spawns",
-                        "value": 15
+                        "value": 10
                     }
                 },
                 {
@@ -102,37 +102,37 @@
                 {
                     "$set": {
                         "path": "$.world-settings.default.mob-spawn-range",
-                        "value": 3
+                        "value": 8
                     }
                 },
                 {
                     "$set": {
                         "path": "$.world-settings.default.merge-radius.item",
-                        "value": 2.5
+                        "value": -1
                     }
                 },
                 {
                     "$set": {
                         "path": "$.world-settings.default.merge-radius.exp",
-                        "value": 3
+                        "value": -1
                     }
                 },
                 {
                     "$set": {
                         "path": "$.world-settings.default.entity-activation-range.animals",
-                        "value": 32
+                        "value": 96
                     }
                 },
                 {
                     "$set": {
                         "path": "$.world-settings.default.entity-activation-range.monsters",
-                        "value": 32
+                        "value": 96
                     }
                 },
                 {
                     "$set": {
                         "path": "$.world-settings.default.entity-activation-range.raiders",
-                        "value": 64
+                        "value": 96
                     }
                 },
                 {
@@ -181,6 +181,12 @@
                     "$set": {
                         "path": "$.world-settings.default.entity-tracking-range.misc",
                         "value": 96
+                    }
+                },
+                {
+                    "$set": {
+                        "path": "$.world-settings.default.entity-tracking-range.display",
+                        "value": 128
                     }
                 },
                 {

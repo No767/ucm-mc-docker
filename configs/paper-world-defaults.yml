@@ -56,25 +56,25 @@ chunks:
   entity-per-chunk-save-limit:
     area_effect_cloud: 8
     arrow: 16
-    breeze_wind_charge: 8
-    dragon_fireball: 3
-    egg: 8
-    ender_pearl: 8
-    experience_bottle: 3
-    experience_orb: 16
-    eye_of_ender: 8
-    fireball: 8
-    firework_rocket: 8
-    llama_spit: 3
-    splash_potion: 8
-    lingering_potion: 8
+    breeze_wind_charge: 10
+    dragon_fireball: 5
+    egg: 16
+    ender_pearl: 10
+    eye_of_ender: 10
+    experience_bottle: 5
+    experience_orb: 50
+    fireball: 10
+    small_fireball: 10
+    firework_rocket: 10
+    snowball: 20
+    llama_spit: 5
     shulker_bullet: 8
-    small_fireball: 8
-    snowball: 8
-    spectral_arrow: 16
-    trident: 16
+    splash_potion: 10
+    spectral_arrow: 5
+    trident: 10
+    wither_skull: 10
+    lingering_potion: 8
     wind_charge: 8
-    wither_skull: 4
   fixed-chunk-inhabited-time: -1
   flush-regions-on-save: false
   max-auto-save-chunks-per-tick: 24
@@ -82,16 +82,16 @@ chunks:
 collisions:
   allow-player-cramming-damage: false
   allow-vehicle-collisions: true
-  fix-climbing-bypassing-cramming-rule: false
-  max-entity-collisions: 3
+  fix-climbing-bypassing-cramming-rule: true
+  max-entity-collisions: 8
   only-players-collide: false
 command-blocks:
   force-follow-perm-level: true
   permissions-level: 2
 entities:
   armor-stands:
-    do-collision-entity-lookups: false
-    tick: false
+    do-collision-entity-lookups: true
+    tick: true
   behavior:
     allow-spider-world-border-climbing: true
     baby-zombie-movement-modifier: 0.5
@@ -136,6 +136,7 @@ entities:
     player-insomnia-start-ticks: 72000
     should-remove-dragon: false
     spawner-nerfed-mobs-should-jump: false
+    stuck-entity-poi-retry-delay: 200
     zombie-villager-infection-chance: default
     zombies-target-turtle-eggs: true
   markers:
@@ -153,64 +154,80 @@ entities:
     alt-item-despawn-rate:
       enabled: true
       items:
-        cobblestone: 300
-        netherrack: 300
-        sand: 300
-        red_sand: 300
-        gravel: 300
-        dirt: 300
-        short_grass: 300
-        pumpkin: 300
-        melon_slice: 300
-        kelp: 300
-        bamboo: 300
-        sugar_cane: 300
-        twisting_vines: 300
-        weeping_vines: 300
-        oak_leaves: 300
-        spruce_leaves: 300
-        birch_leaves: 300
-        jungle_leaves: 300
-        acacia_leaves: 300
-        dark_oak_leaves: 300
-        mangrove_leaves: 300
-        cherry_leaves: 300
-        cactus: 300
-        diorite: 300
-        granite: 300
-        andesite: 300
-        scaffolding: 600
+        cobblestone: 600
+        cobbled_deepslate: 600
+        netherrack: 600
+        rotten_flesh: 900
+        ender_pearl: 900
+        leather: 900
+        bone: 1200
+        bone_meal: 1200
+        cactus: 900
+        egg: 900
+        feather: 900
+        gunpowder: 1200
+        arrow: 900
+        blaze_rod: 1200
+        cod: 1200
+        salmon: 1200
+        string: 1200
+        ink_sac: 900
+        slime_ball: 1200
+        phantom_membrane: 900
     count-all-mobs-for-spawning: false
-    creative-arrow-despawn-rate: 20
+    creative-arrow-despawn-rate: default
     despawn-range-shape: ELLIPSOID
     despawn-ranges:
       ambient:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       axolotls:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       creature:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       misc:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       monster:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       underground_water_creature:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       water_ambient:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
       water_creature:
-        hard: 60
-        soft: 30
+        hard:
+          horizontal: 80
+          vertical: default
+        soft: default
     despawn-time:
-      llama_spit: disabled
-      snowball: disabled
+      llama_spit: 1200
+      snowball: 1200
+      fireball: 1200
+      dragon_fireball: 1200
+      small_fireball: 1200
+      arrow: 3000
+      shulker_bullet: 3000
+      wither_skull: 3000
+      trident: 3000
     disable-mob-spawner-spawn-egg-transformation: false
     duplicate-uuid:
       mode: SAFE_REGEN
@@ -222,7 +239,7 @@ entities:
     - sleeping_pos
     iron-golems-can-spawn-in-air: false
     monster-spawn-max-light-level: default
-    non-player-arrow-despawn-rate: 20
+    non-player-arrow-despawn-rate: default
     per-player-mob-spawns: true
     scan-for-legacy-ender-dragon: true
     skeleton-horse-thunder-spawn-chance: default
@@ -233,21 +250,21 @@ entities:
         maximum: 70.0
         minimum: 50.0
     spawn-limits:
-      ambient: 5
+      ambient: 0
       axolotls: 3
       creature: 10
-      monsters: 65
+      monster: 70
       underground_water_creature: 5
-      water_ambient: 15
-      water_creature: 3
+      water_ambient: 20
+      water_creature: 5
     ticks-per-spawn:
-      ambient: 400
-      axolotls: 400
-      creature: 325
-      monster: 10
-      underground_water_creature: 400
-      water_ambient: 400
-      water_creature: 350
+      ambient: -1
+      axolotls: -1
+      creature: -1
+      monster: -1
+      underground_water_creature: -1
+      water_ambient: -1
+      water_creature: -1
     wandering-trader:
       spawn-chance-failure-increment: 25
       spawn-chance-max: 75
@@ -258,9 +275,9 @@ entities:
       maximum: default
       minimum: default
   tracking-range-y:
+    enabled: true
     animal: default
     display: default
-    enabled: false
     misc: default
     monster: default
     other: default
@@ -288,7 +305,7 @@ environment:
     enabled: true
     find-already-discovered:
       loot-tables: default
-      villager-trade: false
+      villager-trade: true
   void-damage-amount: 4.0
   void-damage-min-build-height-offset: -64.0
   water-over-lava-flow-speed: 5
@@ -300,7 +317,7 @@ fishing-time-range:
 fixes:
   disable-unloaded-chunk-enderpearl-exploit: false
   falling-block-height-nerf: disabled
-  fix-items-merging-through-walls: true
+  fix-items-merging-through-walls: false
   prevent-tnt-from-moving-in-water: false
   split-overstacked-loot: true
   tnt-entity-height-nerf: disabled
@@ -327,6 +344,7 @@ max-growth-height:
   cactus: 3
   reeds: 3
 misc:
+  allow-remote-ender-dragon-respawning: false
   alternate-current-update-order: HORIZONTAL_FIRST_OUTWARD
   disable-end-credits: false
   disable-relative-projectile-velocity: false
@@ -345,14 +363,14 @@ spawn:
 tick-rates:
   behavior:
     villager:
-      validatenearbypoi: -1
+      validatenearbypoi: 120
   container-update: 1
   dry-farmland: 1
-  grass-spread: 3
-  mob-spawner: 2
+  grass-spread: 1
+  mob-spawner: 1
   sensor:
     villager:
-      secondarypoisensor: 40
+      secondarypoisensor: 240
   wet-farmland: 1
 unsupported-settings:
   disable-world-ticking-when-empty: false

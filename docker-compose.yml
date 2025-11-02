@@ -53,12 +53,14 @@ services:
         luckperms
         terra:beta
         viaversion:beta
+        bolt
 
       # Direct plugin sources
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
         https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
         https://ci.lucko.me/job/spark/504/artifact/spark-bukkit/build/libs/spark-1.10.154-bukkit.jar
+        https://github.com/Bleep0/AntiBookBan/releases/download/1.3/AntiBookBan.jar
 
       # Yes, Noelle is server op
       OPS: |
@@ -72,8 +74,8 @@ services:
       # server.properties override 
       MOTD: "UC MERCED SERVER YAAAAAAY"
       NETWORK_COMPRESSION_THRESHOLD: 256
-      SIMULATION_DISTANCE: 3
-      VIEW_DISTANCE: 8
+      SIMULATION_DISTANCE: 8
+      VIEW_DISTANCE: 10
       ENABLE_STATUS: "true"
       ENFORCE_SECURE_PROFILE: "false" # Don't report to mojang
     depends_on:

@@ -17,7 +17,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "6144M"
+      MEMORY: "12288M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"

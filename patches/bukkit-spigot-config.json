@@ -93,6 +93,20 @@
                         "key": "worlds.world.generator",
                         "value": "Terra:OVERWORLD"
                     }
+                },
+                {
+                    "$put": {
+                        "path": "$",
+                        "key": "worlds.world_nether.generator",
+                        "value": "Terra:TARTARUS"
+                    }
+                },
+                {
+                    "$put": {
+                        "path": "$",
+                        "key": "worlds.world_the_end.generator",
+                        "value": "Terra:REIMAGEND"
+                    }
                 }
             ]
         },

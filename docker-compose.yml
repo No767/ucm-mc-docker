@@ -17,7 +17,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "12288M"
+      MEMORY: "10240M"
       USE_MEOWICE_FLAGS: "true"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
@@ -67,6 +67,10 @@ services:
       # Yes, Noelle is server op
       OPS: |
         Winter_Melody
+        Anarele
+
+      RCON_CMDS_STARTUP: |
+        gamerule playersSleepingPercentage 0
       
       # Whitelist
       WHITELIST_FILE: /whitelist.json

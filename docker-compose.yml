@@ -211,7 +211,7 @@ services:
     image: nginx:stable-alpine
     ports:
       - 80:80
-      - 81:81
+      - 443:443
     command: "nginx -g 'daemon off;'"
     networks:
       - proxy_bridge

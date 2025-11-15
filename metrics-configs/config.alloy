@@ -1,0 +1,33 @@
+loki.write "default" {
+	endpoint {
+		url = "http://loki:3100/loki/api/v1/push"
+	}
+}
+
+discovery.docker "linux" {
+  host = "unix:///var/run/docker.sock"
+}
+
+discovery.relabel "logs_integrations_docker" {
+  targets = []
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex = "/(.*)"
+    target_label = "service_name"
+  }
+  rule {
+    source_labels = ["__meta_docker_container_image_name"]
+    regex = "/(.*)"
+    target_label = "image"
+  }
+}
+
+loki.source.docker "logs" {
+    host = "unix:///var/run/docker.sock"
+    targets = discovery.docker.linux.targets
+    forward_to = [loki.write.default.receiver]
+
+    labels = {"platform" = "docker"}
+    relabel_rules = discovery.relabel.logs_integrations_docker.rules
+}

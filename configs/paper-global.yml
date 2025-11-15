@@ -126,7 +126,7 @@ spam-limiter:
   tab-spam-increment: 1
   tab-spam-limit: 500
 spark:
-  enable-immediately: false
+  enable-immediately: true
   enabled: true
 unsupported-settings:
   allow-headless-pistons: false

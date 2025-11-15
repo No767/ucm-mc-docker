@@ -1,3 +1,5 @@
+name: ucm_mc_docker
+
 services:
   mc:
     container_name: ucm_mc_server
@@ -136,6 +138,9 @@ services:
       /etc/alloy/config.alloy
     ports:
       - 12345:12345
+    networks:
+      - default
+      - proxy_bridge
     depends_on:
       loki:
         condition: service_started
@@ -151,6 +156,9 @@ services:
     image: grafana/loki:latest
     ports:
       - 3100:3100
+    networks:
+      - default
+      - proxy_bridge
     healthcheck:
       test: curl -fs http://localhost:3100/ready || exit 1
       start_period: 10s
@@ -166,6 +174,9 @@ services:
     image: prom/prometheus:latest
     ports:
       - 9090:9090
+    networks:
+      - default
+      - proxy_bridge
     healthcheck:
       test: curl -fs http://localhost:9090/healthy || exit 1
       start_period: 1m
@@ -176,7 +187,67 @@ services:
       - ./metrics-configs/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: unless-stopped
 
+  oauth2_proxy:
+    container_name: ucm_mc_oauth2_proxy_server
+    image: quay.io/oauth2-proxy/oauth2-proxy:latest-alpine
+    ports:
+      - 4180:4180
+    command: --config=/etc/oauth2-proxy.cfg
+    networks:
+      - proxy_bridge
+    healthcheck:
+      test: curl -fs http://localhost:4180/ping || exit 1
+      start_period: 5s
+      interval: 30s
+      start_interval: 5s
+      retries: 2
+    volumes:
+      - ./proxy-configs/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg
+      - ./proxy-configs/auth/auth_emails:/etc/auth_emails
+    restart: unless-stopped
+
+  nginx:
+    container_name: ucm_mc_nginx
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+      - 81:81
+    command: "nginx -g 'daemon off;'"
+    networks:
+      - proxy_bridge
+    healthcheck:
+      test: curl -fs http://localhost:80/ping || exit 1
+      start_period: 5s
+      interval: 30s
+      start_interval: 5s
+    volumes:
+      - ./proxy-configs/nginx/blank-default.conf:/etc/nginx/conf.d/default.conf
+      - ./proxy-configs/nginx/loki.conf:/etc/nginx/conf.d/loki.conf
+      - ./proxy-configs/nginx/prometheus.conf:/etc/nginx/conf.d/prometheus.conf
+
+      # loki-ucm-mc.mineced.org ssl certs
+      - /etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem:/etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem
+      - /etc/letsencrypt/live/loki-ucm-mc.mineced.org/privkey.pem:/etc/letsencrypt/live/loki-ucm-mc.mineced.org/privkey.pem
+
+      # prometheus-ucm-mc.mineced.org ssl certs
+      - /etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/fullchain.pem:/etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/fullchain.pem
+      - /etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/privkey.pem:/etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/privkey.pem
+
+      # Certbot things
+      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+      
+      # Just for ACME challenge
+      - nginx_letsencrypt:/var/www/letsencrypt
+      
+    restart: unless-stopped
+
+networks:
+  proxy_bridge:
+    driver: bridge
+
 volumes:
   alloy_data:
   loki_data:
   prometheus_data:
+  nginx_letsencrypt:

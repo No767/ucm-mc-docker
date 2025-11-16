@@ -238,6 +238,9 @@ services:
       # Certbot things
       - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
       - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+
+      # htpasswd
+      - ./proxy-configs/auth/.htpasswd:/etc/nginx/.htpasswd
       
       # Just for ACME challenge
       - nginx_letsencrypt:/var/www/letsencrypt

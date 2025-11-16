@@ -225,7 +225,7 @@ services:
     volumes:
       - ./proxy-configs/nginx/blank-default.conf:/etc/nginx/conf.d/default.conf
       - ./proxy-configs/nginx/loki.conf:/etc/nginx/conf.d/loki.conf
-      - ./proxy-configs/nginx/default.conf:/etc/nginx/conf.d/prometheus.conf
+      - ./proxy-configs/nginx/prometheus.conf:/etc/nginx/conf.d/prometheus.conf
 
       # loki-ucm-mc.mineced.org ssl certs
       - /etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem:/etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem

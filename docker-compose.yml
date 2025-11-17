@@ -141,6 +141,11 @@ services:
     networks:
       - default
       - proxy_bridge
+    healthcheck:
+      test: curl -fs http://localhost:12345/ready || exit 1
+      start_period: 10s
+      interval: 5m
+      start_interval: 30s
     depends_on:
       loki:
         condition: service_started

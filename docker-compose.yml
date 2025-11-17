@@ -247,6 +247,16 @@ services:
       
     restart: unless-stopped
 
+  node_exporter:
+    container_name: ucm_mc_node_exporter
+    image: quay.io/prometheus/node-exporter:latest
+    command: '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'
+    restart: unless-stopped
+
 networks:
   proxy_bridge:
     driver: bridge

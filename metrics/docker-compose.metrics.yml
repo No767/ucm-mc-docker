@@ -20,7 +20,7 @@ services:
   node_exporter:
     container_name: node_exporter
     image: quay.io/prometheus/node-exporter:latest
-    command: '--path.rootfs=/host --web.listen-address=:9101'
+    command: '--path.rootfs=/host'
     network_mode: host
     pid: host
     volumes:

@@ -112,11 +112,7 @@ services:
 
   database:
     container_name: ucm_mc_database
-    # image: mariadb:lts-noble
-    build:
-      dockerfile_inline: |
-        FROM mariadb:lts-noble
-        COPY /metrics/configs/mysql/seed.sql /docker-entrypoint-initdb.d/seed.sql
+    image: mariadb:lts-noble
     ports:
       - "3306:3306"
     environment:
@@ -124,8 +120,7 @@ services:
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_AUTO_UPGRADE: ${MARIADB_AUTO_UPGRADE}
-      MARIADB_ROOT_PASSWORD: root_password
-      # MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
+      MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
     networks:
       - default
       - proxy_bridge

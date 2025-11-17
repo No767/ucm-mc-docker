@@ -35,7 +35,6 @@ services:
     networks:
       - default
       - proxy_bridge
-    command: --mysqld.username=exporter --mysqld.address=database:3306 --log.level=debug
     environment:
       MYSQLD_EXPORTER_PASSWORD: test
     depends_on:

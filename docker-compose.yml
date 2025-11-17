@@ -251,7 +251,6 @@ services:
     container_name: ucm_mc_node_exporter
     image: quay.io/prometheus/node-exporter:latest
     command: '--path.rootfs=/host'
-    network_mode: host
     pid: host
     volumes:
       - '/:/host:ro,rslave'

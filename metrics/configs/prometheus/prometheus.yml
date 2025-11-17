@@ -1,0 +1,29 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Services
+  - job_name: mc
+    static_configs:
+      - targets: ["mc:9770"]
+  - job_name: "mysql"
+    static_configs:
+      - targets: ["mysql_exporter:9104"]
+  - job_name: "alloy"
+    static_configs:
+      - targets: ["alloy:12345"]
+  - job_name: "loki"
+    static_configs:
+      - targets: ["loki:3100"]
+  - job_name: "haproxy"
+    static_configs:
+      - targets: ["haproxy:8404"]
+
+  # Exporters
+  - job_name: "node_exporter"
+    static_configs:
+      - targets: ["localhost:9100"]
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]

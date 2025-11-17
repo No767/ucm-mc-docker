@@ -178,7 +178,7 @@ services:
       - default
       - proxy_bridge
     healthcheck:
-      test: wget -q -O /dev/null http://prometheus:9090/healthy || exit 1
+      test: wget -q -O /dev/null http://prometheus:9090/api/v1/status/buildinfo || exit 1
       start_period: 5s # old is 1m
       interval: 5s
       start_interval: 5s # 30s

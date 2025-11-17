@@ -205,7 +205,7 @@ services:
     healthcheck:
       test: wget -q -O /dev/null http://haproxy:8404/metrics || exit 1
       start_period: 5s
-      interval: 30s
+      interval: 5s
       start_interval: 5s
     volumes:
       - /etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem

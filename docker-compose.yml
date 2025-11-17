@@ -194,7 +194,7 @@ services:
 
   haproxy:
     container_name: ucm_mc_haproxy
-    image: haproxy:lts-trixie
+    image: haproxy:lts-alpine
     ports:
       - 80:80
       - 443:443

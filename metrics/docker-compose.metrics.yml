@@ -1,0 +1,54 @@
+name: ucm_mc_docker_exporters
+
+services:
+  cadvisor:
+    container_name: cadvisor
+    image: ghcr.io/google/cadvisor:v0.53.0
+    ports:
+      - 8080:8080
+    privileged: true
+    devices:
+      - "/dev/kmsg"
+    volumes:
+      - "/:/rootfs:ro"
+      - "/var/run:/var/run:ro"
+      - "/sys:/sys:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/dev/disk/:/dev/disk:ro"
+    restart: unless-stopped
+
+  node_exporter:
+    container_name: node_exporter
+    image: quay.io/prometheus/node-exporter:latest
+    command: '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'
+    restart: unless-stopped
+
+  mysql_exporter:
+    container_name: mysql_exporter
+    image: prom/mysqld-exporter:latest
+    ports:
+      - 9104:9104
+    networks:
+      - default
+      - proxy_bridge
+    environment:
+      MYSQLD_EXPORTER_PASSWORD: test
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: wget -q -O /dev/null http://mysql_exporter:9104/metrics || exit 1
+      start_period: 5s
+      interval: 5s
+      start_interval: 5s
+    volumes:
+      - ./configs/mysql/mysql.cnf:/.my.cnf
+    restart: unless-stopped
+    
+
+volumes:
+  prometheus_data:

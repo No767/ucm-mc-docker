@@ -1,0 +1,31 @@
+# HTTP: Scrape via HTTP endpoint
+# PUSHGATEWAY: Pushes to a remote PushGateway server. THIS IS *NOT* remote_write!
+mode: "HTTP"
+
+# Applies to "HTTP" mode.
+http:
+  host: "0.0.0.0"
+  # The default in 0.4.x will be 9970.
+  # Note that this port needs to match the port that you have allocated
+  port: 9770
+  authentication:
+    # Authentication is encouraged when using a shared host or when exposing the endpoint publicly
+    # NONE: Authentication disabled
+    # BASIC: Username/password authentication
+    scheme: "NONE"
+    username: "username"
+    password: "password"
+
+# Applies to "PUSHGATEWAY" mode.
+# Note that this is NOT compatible with remote_write.
+pushGateway:
+  job: "unifiedmetrics"
+  url: "http://pushgateway:9091"
+  authentication:
+    # NONE: Authentication disabled
+    # BASIC: Username/password authentication
+    scheme: "BASIC"
+    username: "username"
+    password: "password"
+  # The push interval in seconds
+  interval: 10

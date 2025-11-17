@@ -205,6 +205,8 @@ services:
     volumes:
       - ./metrics/configs/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
       - ./metrics/configs/haproxy/hostnames.map:/usr/local/etc/haproxy/hostnames.map
+      - /etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem
+      - /etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem
     restart: unless-stopped
 
 networks:

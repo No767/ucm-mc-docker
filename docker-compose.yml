@@ -187,26 +187,6 @@ services:
       - ./metrics-configs/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: unless-stopped
 
-  oauth2_proxy:
-    container_name: ucm_mc_oauth2_proxy_server
-    image: quay.io/oauth2-proxy/oauth2-proxy:latest-alpine
-    ports:
-      - 4180:4180
-    command: --config=/etc/oauth2-proxy.cfg
-    networks:
-      - proxy_bridge
-    healthcheck:
-      test: curl -fs http://localhost:4180/ping || exit 1
-      start_period: 5s
-      interval: 30s
-      start_interval: 5s
-      retries: 2
-    volumes:
-      - ./proxy-configs/oauth2-proxy.cfg:/etc/oauth2-proxy.cfg
-      - ./proxy-configs/auth/auth_emails:/etc/auth_emails
-      - ./proxy-configs/auth/.htpasswd:/etc/.htpasswd
-    restart: unless-stopped
-
   nginx:
     container_name: ucm_mc_nginx
     image: nginx:stable-alpine

@@ -14,7 +14,7 @@ services:
     ports:
       - "25565:25565/tcp"
       - "19132:19132/udp"
-      - "9100:9100/tcp"
+      - "9770:9770/tcp"
     environment:
       # Treat them as system accounts
       UID: 999

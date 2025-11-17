@@ -1,132 +1,132 @@
 name: ucm_mc_docker
 
 services:
-  mc:
-    container_name: ucm_mc_server
-    image: itzg/minecraft-server:java21
-    tty: true
-    stdin_open: true
-    ports:
-      - "25565:25565/tcp"
-      - "19132:19132/udp"
-      - "9100:9100/tcp"
-    environment:
-      # Treat them as system accounts
-      UID: 999
-      GID: 999
+  # mc:
+  #   container_name: ucm_mc_server
+  #   image: itzg/minecraft-server:java21
+  #   tty: true
+  #   stdin_open: true
+  #   ports:
+  #     - "25565:25565/tcp"
+  #     - "19132:19132/udp"
+  #     - "9100:9100/tcp"
+  #   environment:
+  #     # Treat them as system accounts
+  #     UID: 999
+  #     GID: 999
 
-      # General settings
-      VERSION: "1.21.8"
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      PAPER_CHANNEL: "experimental"
-      MEMORY: "10244M"
-      USE_MEOWICE_FLAGS: "true"
-      ICON: "/icon.png"
-      OVERRIDE_ICON: "true"
+  #     # General settings
+  #     VERSION: "1.21.8"
+  #     EULA: "TRUE"
+  #     TYPE: "PAPER"
+  #     PAPER_CHANNEL: "experimental"
+  #     MEMORY: "10244M"
+  #     USE_MEOWICE_FLAGS: "true"
+  #     ICON: "/icon.png"
+  #     OVERRIDE_ICON: "true"
 
-      # Environment variables within configs
-      REPLACE_ENV_VARIABLES: "true"
-      REPLACE_ENV_VARIABLES_EXCLUDES: |
-        data/plugins/Geyser-Spigot/custom-skulls.yml
-        data/plugins/CoreProtect/language.yml
-        data/plugins/LuckPerms/translations
+  #     # Environment variables within configs
+  #     REPLACE_ENV_VARIABLES: "true"
+  #     REPLACE_ENV_VARIABLES_EXCLUDES: |
+  #       data/plugins/Geyser-Spigot/custom-skulls.yml
+  #       data/plugins/CoreProtect/language.yml
+  #       data/plugins/LuckPerms/translations
 
-      # Environment variables for database connections
-      ENV_VARIABLE_PREFIX: "CFG_"
-      CFG_DB: mc
-      CFG_DB_HOST: database
-      CFG_DB_USER: ${MARIADB_USER}
-      CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
+  #     # Environment variables for database connections
+  #     ENV_VARIABLE_PREFIX: "CFG_"
+  #     CFG_DB: mc
+  #     CFG_DB_HOST: database
+  #     CFG_DB_USER: ${MARIADB_USER}
+  #     CFG_DB_PASSWORD: ${MARIADB_PASSWORD}
 
-      # Patch both bukkit and spigot configs
-      PATCH_DEFINITIONS: /patches/bukkit-spigot-config.json
+  #     # Patch both bukkit and spigot configs
+  #     PATCH_DEFINITIONS: /patches/bukkit-spigot-config.json
 
-      # Maintain server seed
-      # SEED: "8312171185849629204"
+  #     # Maintain server seed
+  #     # SEED: "8312171185849629204"
 
-      # Game settings
-      MAX_PLAYERS: 30
-      MODE: "survival"
-      DIFFICULTY: "normal"
+  #     # Game settings
+  #     MAX_PLAYERS: 30
+  #     MODE: "survival"
+  #     DIFFICULTY: "normal"
 
-      # Plugins
-      MODRINTH_PROJECTS: |
-        chunky
-        coreprotect
-        luckperms
-        terra:beta
-        viaversion:beta
-        bolt
-        distant-horizons-support
+  #     # Plugins
+  #     MODRINTH_PROJECTS: |
+  #       chunky
+  #       coreprotect
+  #       luckperms
+  #       terra:beta
+  #       viaversion:beta
+  #       bolt
+  #       distant-horizons-support
 
-      # Direct plugin sources
-      PLUGINS: |
-        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
-        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
-        https://github.com/Bleep0/AntiBookBan/releases/download/1.3/AntiBookBan.jar
-        https://github.com/Cubxity/UnifiedMetrics/releases/download/v0.3.x-SNAPSHOT/unifiedmetrics-platform-bukkit-0.3.10-SNAPSHOT.jar
+  #     # Direct plugin sources
+  #     PLUGINS: |
+  #       https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+  #       https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+  #       https://github.com/Bleep0/AntiBookBan/releases/download/1.3/AntiBookBan.jar
+  #       https://github.com/Cubxity/UnifiedMetrics/releases/download/v0.3.x-SNAPSHOT/unifiedmetrics-platform-bukkit-0.3.10-SNAPSHOT.jar
 
-      # Yes, Noelle is server op
-      OPS: |
-        Winter_Melody
-        Anarele
+  #     # Yes, Noelle is server op
+  #     OPS: |
+  #       Winter_Melody
+  #       Anarele
 
-      RCON_CMDS_STARTUP: |
-        gamerule playersSleepingPercentage 0
+  #     RCON_CMDS_STARTUP: |
+  #       gamerule playersSleepingPercentage 0
       
-      # Whitelist
-      WHITELIST_FILE: /whitelist.json
-      ENFORCE_WHITELIST: "true"
-      ENABLE_WHITELIST: "true"
+  #     # Whitelist
+  #     WHITELIST_FILE: /whitelist.json
+  #     ENFORCE_WHITELIST: "true"
+  #     ENABLE_WHITELIST: "true"
 
-      # server.properties override 
-      MOTD: "UC MERCED SERVER YAAAAAAY"
-      NETWORK_COMPRESSION_THRESHOLD: 256
-      SIMULATION_DISTANCE: 6
-      VIEW_DISTANCE: 8
-      ENABLE_STATUS: "true"
-    depends_on:
-      database:
-        condition: service_healthy
-    logging:
-      driver: "json-file"
-    healthcheck:
-      test: mc-health
-      start_period: 1m
-      interval: 5s
-      retries: 20
-    volumes:
-      - "${DATA_LOCATION}:/data"
-      - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
-      - "./whitelist.json:/whitelist.json"
-      - "./configs:/config"
-      - "./mc-plugins:/plugins"
-      - "./server-icon.png:/icon.png"
-    restart: unless-stopped
+  #     # server.properties override 
+  #     MOTD: "UC MERCED SERVER YAAAAAAY"
+  #     NETWORK_COMPRESSION_THRESHOLD: 256
+  #     SIMULATION_DISTANCE: 6
+  #     VIEW_DISTANCE: 8
+  #     ENABLE_STATUS: "true"
+  #   depends_on:
+  #     database:
+  #       condition: service_healthy
+  #   logging:
+  #     driver: "json-file"
+  #   healthcheck:
+  #     test: mc-health
+  #     start_period: 1m
+  #     interval: 5s
+  #     retries: 20
+  #   volumes:
+  #     - "${DATA_LOCATION}:/data"
+  #     - "./patches/bukkit-spigot-config.json:/patches/bukkit-spigot-config.json"
+  #     - "./whitelist.json:/whitelist.json"
+  #     - "./configs:/config"
+  #     - "./mc-plugins:/plugins"
+  #     - "./server-icon.png:/icon.png"
+  #   restart: unless-stopped
 
-  database:
-    container_name: ucm_mc_database
-    image: mariadb:lts-noble
-    ports:
-      - "3306:3306"
-    environment:
-      MARIADB_DATABASE: ${MARIADB_DATABASE}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_AUTO_UPGRADE: ${MARIADB_AUTO_UPGRADE}
-      MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
-    logging:
-      driver: "json-file"
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      start_period: 10s
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    volumes:
-      - "${DB_DATA_LOCATION}:/var/lib/mysql:Z"
-    restart: unless-stopped
+  # database:
+  #   container_name: ucm_mc_database
+  #   image: mariadb:lts-noble
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MARIADB_DATABASE: ${MARIADB_DATABASE}
+  #     MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+  #     MARIADB_USER: ${MARIADB_USER}
+  #     MARIADB_AUTO_UPGRADE: ${MARIADB_AUTO_UPGRADE}
+  #     MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
+  #   logging:
+  #     driver: "json-file"
+  #   healthcheck:
+  #     test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+  #     start_period: 10s
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+  #   volumes:
+  #     - "${DB_DATA_LOCATION}:/var/lib/mysql:Z"
+  #   restart: unless-stopped
 
   alloy:
     container_name: ucm_mc_alloy
@@ -187,53 +187,24 @@ services:
       - ./metrics-configs/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: unless-stopped
 
-  nginx:
-    container_name: ucm_mc_nginx
-    image: nginx:stable-alpine
+  haproxy:
+    container_name: ucm_mc_haproxy
+    image: haproxy:lts-trixie
     ports:
       - 80:80
       - 443:443
-    command: "nginx -g 'daemon off;'"
+      - 8404:8404
     networks:
       - default
       - proxy_bridge
     healthcheck:
-      test: curl -fs http://localhost:80/ping || exit 1
+      test: curl -fs http://localhost:8404/metrics || exit 1
       start_period: 5s
       interval: 30s
       start_interval: 5s
     volumes:
-      - ./proxy-configs/nginx/blank-default.conf:/etc/nginx/conf.d/default.conf
-      - ./proxy-configs/nginx/loki.conf:/etc/nginx/conf.d/loki.conf
-      - ./proxy-configs/nginx/prometheus.conf:/etc/nginx/conf.d/prometheus.conf
-
-      # loki-ucm-mc.mineced.org ssl certs
-      - /etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem:/etc/letsencrypt/live/loki-ucm-mc.mineced.org/fullchain.pem
-      - /etc/letsencrypt/live/loki-ucm-mc.mineced.org/privkey.pem:/etc/letsencrypt/live/loki-ucm-mc.mineced.org/privkey.pem
-
-      # prometheus-ucm-mc.mineced.org ssl certs
-      - /etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/fullchain.pem:/etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/fullchain.pem
-      - /etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/privkey.pem:/etc/letsencrypt/live/prometheus-ucm-mc.mineced.org/privkey.pem
-
-      # Certbot things
-      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
-      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
-
-      # htpasswd
-      - ./proxy-configs/auth/.htpasswd:/etc/nginx/.htpasswd
-      
-      # Just for ACME challenge
-      - nginx_letsencrypt:/var/www/letsencrypt
-      
-    restart: unless-stopped
-
-  node_exporter:
-    container_name: ucm_mc_node_exporter
-    image: quay.io/prometheus/node-exporter:latest
-    command: '--path.rootfs=/host'
-    pid: host
-    volumes:
-      - '/:/host:ro,rslave'
+      - ./metrics/configs/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./metrics/configs/haproxy/hostnames.map:/usr/local/etc/haproxy/hostnames.map
     restart: unless-stopped
 
 networks:
@@ -244,4 +215,4 @@ volumes:
   alloy_data:
   loki_data:
   prometheus_data:
-  nginx_letsencrypt:
+  haproxy_data:

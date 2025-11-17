@@ -160,7 +160,7 @@ services:
       - default
       - proxy_bridge
     healthcheck:
-      test: wget -q -O /dev/null http://localhost:3100/ready || exit 1
+      test: wget -q -O /dev/null http://loki:3100/ready || exit 1
       start_period: 5s
       interval: 5s
       start_interval: 5s

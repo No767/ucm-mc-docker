@@ -142,7 +142,7 @@ services:
       - default
       - proxy_bridge
     healthcheck:
-      test: curl -fs http://localhost:12345/ready || exit 1
+      test: wget -q -O /dev/null http://localhost:12345/ready || exit 1
       start_period: 5s
       interval: 5s
       start_interval: 5s
@@ -165,7 +165,7 @@ services:
       - default
       - proxy_bridge
     healthcheck:
-      test: curl -fs http://localhost:3100/ready || exit 1
+      test: wget -q -O /dev/null http://localhost:3100/ready || exit 1
       start_period: 5s
       interval: 5s
       start_interval: 5s
@@ -183,7 +183,7 @@ services:
       - default
       - proxy_bridge
     healthcheck:
-      test: curl -fs http://localhost:9090/healthy || exit 1
+      test: wget -q -O /dev/null http://localhost:9090/healthy || exit 1
       start_period: 5s # old is 1m
       interval: 5s
       start_interval: 5s # 30s

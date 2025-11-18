@@ -182,9 +182,10 @@ services:
     image: prom/prometheus:latest
     ports:
       - 9090:9090
-    networks:
-      - default
-      - proxy_bridge
+    # networks:
+    #   - default
+    #   - proxy_bridge
+    network_mode: host 
     healthcheck:
       test: wget -q -O /dev/null http://prometheus:9090/api/v1/status/buildinfo || exit 1
       start_period: 5s # old is 1m

@@ -2,7 +2,7 @@ name: ucm_mc_docker_exporters
 
 services:
   cadvisor:
-    container_name: cadvisor
+    container_name: ucm_mc_cadvisor
     image: ghcr.io/google/cadvisor:v0.53.0
     ports:
       - 8080:8080
@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   node_exporter:
-    container_name: node_exporter
+    container_name: ucm_mc_node_exporter
     image: quay.io/prometheus/node-exporter:latest
     command: '--path.rootfs=/host'
     network_mode: host
@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
 
   mysql_exporter:
-    container_name: mysql_exporter
+    container_name: ucm_mc_mysql_exporter
     image: prom/mysqld-exporter:latest
     ports:
       - 9104:9104

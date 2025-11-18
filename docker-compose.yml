@@ -62,7 +62,6 @@ services:
         terra:beta
         viaversion:beta
         bolt
-        distant-horizons-support
 
       # Direct plugin sources
       PLUGINS: |

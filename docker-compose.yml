@@ -90,6 +90,9 @@ services:
       SIMULATION_DISTANCE: 6
       VIEW_DISTANCE: 8
       ENABLE_STATUS: "true"
+    networks:
+      - default
+      - proxy_bridge
     depends_on:
       database:
         condition: service_healthy

@@ -169,9 +169,9 @@ services:
       - proxy_bridge
     healthcheck:
       test: wget -q -O /dev/null http://loki:3100/ready || exit 1
-      start_period: 5s
-      interval: 5s
-      start_interval: 5s
+      start_period: 15s
+      interval: 30s
+      start_interval: 15s
     volumes:
       - loki_data:/loki
       - ./metrics/configs/loki/loki-local-config.yml:/etc/loki/local-config.yaml
@@ -187,9 +187,9 @@ services:
       - proxy_bridge
     healthcheck:
       test: wget -q -O /dev/null http://prometheus:9090/api/v1/status/buildinfo || exit 1
-      start_period: 5s # old is 1m
-      interval: 5s
-      start_interval: 5s # 30s
+      start_period: 15s # old is 1m
+      interval: 30s
+      start_interval: 15s # 30s
     volumes:
       - prometheus_data:/prometheus
       - ./metrics/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -207,9 +207,9 @@ services:
       - proxy_bridge
     healthcheck:
       test: wget -q -O /dev/null http://haproxy:8404/metrics || exit 1
-      start_period: 5s
-      interval: 5s
-      start_interval: 5s
+      start_period: 15s
+      interval: 30s
+      start_interval: 15s
     volumes:
       - /etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem
       - /etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem

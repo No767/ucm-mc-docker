@@ -8,7 +8,7 @@ include:
 services:
   mc:
     container_name: ucm_mc_server
-    image: itzg/minecraft-server:java25
+    image: itzg/minecraft-server:java21
     tty: true
     stdin_open: true
     ports:

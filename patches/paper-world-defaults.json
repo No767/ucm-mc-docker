@@ -1,0 +1,190 @@
+{
+    "file": "/data/config/paper-world-defaults.yml",
+    "ops": [
+        {
+            "$set": {
+                "path": "$.chunks.entity-per-chunk-save-limit",
+                "value": {
+                    "area_effect_cloud": 8,
+                    "arrow": 16,
+                    "breeze_wind_charge": 10,
+                    "dragon_fireball": 5,
+                    "egg": 16,
+                    "ender_pearl": 10,
+                    "eye_of_ender": 10,
+                    "experience_bottle": 5,
+                    "experience_orb": 50,
+                    "fireball": 10,
+                    "small_fireball": 10,
+                    "firework_rocket": 10,
+                    "snowball": 20,
+                    "llama_spit": 5,
+                    "shulker_bullet": 8,
+                    "splash_potion": 10,
+                    "spectral_arrow": 5,
+                    "trident": 10,
+                    "wither_skull": 10,
+                    "lingering_potion": 8,
+                    "wind_charge": 8
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.chunks.prevent-moving-into-unloaded-chunks",
+                "value": true
+            }
+        },
+        {
+            "$set": {
+                "path": "$.collisions.fix-climbing-bypassing-cramming-rule",
+                "value": true
+            }
+        },
+        {
+            "$set": {
+                "path": "$.entities.spawning.alt-item-despawn-rate",
+                "value": {
+                    "enabled": true,
+                    "items": {
+                        "cobblestone": 600,
+                        "cobbled_deepslate": 600,
+                        "netherrack": 600,
+                        "rotten_flesh": 900,
+                        "ender_pearl": 900,
+                        "leather": 900,
+                        "bone": 1200,
+                        "bone_meal": 1200,
+                        "cactus": 900,
+                        "egg": 900,
+                        "feather": 900,
+                        "gunpowder": 1200,
+                        "arrow": 900,
+                        "blaze_rod": 1200,
+                        "cod": 1200,
+                        "salmon": 1200,
+                        "string": 1200,
+                        "ink_sac": 900,
+                        "slime_ball": 1200,
+                        "phantom_membrane": 900
+                    }
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.entities.spawning.despawn-ranges",
+                "value": {
+                    "ambient": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "axolotls": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "creature": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "misc": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "monster": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "underground_water_creature": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "water_ambient": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    },
+                    "water_creature": {
+                        "hard": {
+                            "horizontal": 80,
+                            "vertical": "default"
+                        },
+                        "soft": "default"
+                    }
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.entities.spawning.despawn-time",
+                "value": {
+                    "llama_spit": 1200,
+                    "snowball": 1200,
+                    "fireball": 1200,
+                    "dragon_fireball": 1200,
+                    "small_fireball": 1200,
+                    "arrow": 3000,
+                    "shulker_bullet": 3000,
+                    "wither_skull": 3000,
+                    "trident": 3000
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.entities.tracking-range-y.enabled",
+                "value": true
+            }
+        },
+        {
+            "$set": {
+                "path": "$.environment.optimize-explosions",
+                "value": true
+            }
+        },
+        {
+            "$set": {
+                "path": "$.environment.treasure-maps.find-already-discovered.villager-trade",
+                "value": true
+            }
+        },
+        {
+            "$set": {
+                "path": "$.misc.redstone-implementation",
+                "value": "ALTERNATE_CURRENT"
+            }
+        },
+        {
+            "$set": {
+                "path": "$.tick-rates.behavior.villager.validatenearbypoi",
+                "value": 120
+            }
+        },
+        {
+            "$set": {
+                "path": "$.tick-rates.sensor.villager.secondarypoisensor",
+                "value": 240
+            }
+        }
+    ]
+}

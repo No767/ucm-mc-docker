@@ -1,0 +1,55 @@
+{
+    "file": "/data/bukkit.yml",
+    "ops": [
+        {
+            "$set": {
+                "path": "$.spawn-limits",
+                "value": {
+                    "monsters": 70,
+                    "animals": 10,
+                    "water-animals": 5,
+                    "water-ambient": 20,
+                    "water-underground-creature": 5,
+                    "axolotls": 3,
+                    "ambient": 0
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.ticks-per",
+                "value": {
+                    "animal-spawns": 400,
+                    "monster-spawns": 10,
+                    "water-spawns": 400,
+                    "water-ambient-spawns": 400,
+                    "water-underground-creature-spawns": 400,
+                    "axolotl-spawns": 400,
+                    "ambient-spawns": 400,
+                    "autosave": 6000
+                }
+            }
+        },
+        {
+            "$put": {
+                "path": "$",
+                "key": "worlds.world.generator",
+                "value": "Terra:OVERWORLD"
+            }
+        },
+        {
+            "$put": {
+                "path": "$",
+                "key": "worlds.world_nether.generator",
+                "value": "Terra:TARTARUS"
+            }
+        },
+        {
+            "$put": {
+                "path": "$",
+                "key": "worlds.world_the_end.generator",
+                "value": "Terra:REIMAGEND"
+            }
+        }
+    ]
+}

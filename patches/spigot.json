@@ -1,0 +1,69 @@
+{
+    "file": "/data/spigot.yml",
+    "ops": [
+        {
+            "$set": {
+                "path": "$.world-settings.default.mob-spawn-range",
+                "value": 8
+            }
+        },
+        {
+            "$set": {
+                "path": "$.world-settings.default.merge-radius.item",
+                "value": -1
+            }
+        },
+        {
+            "$set": {
+                "path": "$.world-settings.default.merge-radius.exp",
+                "value": -1
+            }
+        },
+        {
+            "$set": {
+                "path": "$.world-settings.default.entity-activation-range",
+                "value": {
+                    "animals": 96,
+                    "monsters": 96,
+                    "raiders": 96,
+                    "misc": 16,
+                    "water": 16,
+                    "villagers": 32,
+                    "flying-monsters": 32,
+                    "wake-up-inactive": {
+                        "animals-max-per-tick": 4,
+                        "animals-every": 1200,
+                        "animals-for": 100,
+                        "monsters-max-per-tick": 8,
+                        "monsters-every": 400,
+                        "monsters-for": 100,
+                        "villagers-max-per-tick": 4,
+                        "villagers-every": 600,
+                        "villagers-for": 100,
+                        "flying-monsters-max-per-tick": 8,
+                        "flying-monsters-every": 200,
+                        "flying-monsters-for": 100
+                    },
+                    "villagers-work-immunity-after": 100,
+                    "villagers-work-immunity-for": 20,
+                    "villagers-active-for-panic": true,
+                    "tick-inactive-villagers": true,
+                    "ignore-spectators": false
+                }
+            }
+        },
+        {
+            "$set": {
+                "path": "$.world-settings.default.entity-tracking-range",
+                "value": {
+                    "players": 128,
+                    "animals": 96,
+                    "monsters": 96,
+                    "misc": 96,
+                    "display": 128,
+                    "other": 64
+                }
+            }
+        }
+    ]
+}

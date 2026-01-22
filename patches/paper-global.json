@@ -1,0 +1,17 @@
+{
+    "file": "/data/config/paper-global.yml",
+    "ops": [
+        {
+            "$set": {
+                "path": "$.item-validation.book-size.page-max",
+                "value": 2560
+            }
+        },
+        {
+            "$set": {
+                "path": "$.misc.xp-orb-groups-per-area",
+                "value": 45
+            }
+        }
+    ]
+}

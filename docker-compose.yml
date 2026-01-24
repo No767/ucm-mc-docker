@@ -29,7 +29,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "2048M"
+      MEMORY: "6144M"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
 

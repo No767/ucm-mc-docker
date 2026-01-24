@@ -5,6 +5,10 @@ include:
     project_directory: metrics
     env_file: .env
 
+  - path: metrics/docker-compose.exporters.yml
+    project_directory: metrics
+    env_file: .env
+
 services:
   mc:
     container_name: ucm_mc_server
@@ -56,10 +60,10 @@ services:
       # Plugins
       MODRINTH_PROJECTS: |
         chunky
-        luckperms
         terra:beta
-        viaversion:beta
+        luckperms
         bolt
+        viaversion:beta
 
       # Direct plugin sources
       PLUGINS: |
@@ -144,65 +148,6 @@ services:
       - ./metrics/configs/mysql/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     restart: unless-stopped
 
-  alloy:
-    container_name: ucm_mc_alloy
-    image: grafana/alloy:latest
-    command: >
-      run 
-      --server.http.listen-addr=0.0.0.0:12345 
-      --storage.path=/var/lib/alloy/data 
-      /etc/alloy/config.alloy
-    ports:
-      - 12345:12345
-    networks:
-      - default
-      - proxy_bridge
-    depends_on:
-      loki:
-        condition: service_started
-        restart: true
-    volumes:
-      - alloy_data:/var/lib/alloy/data
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./metrics/configs/alloy/config.alloy:/etc/alloy/config.alloy
-    restart: unless-stopped
-
-  loki:
-    container_name: ucm_mc_loki
-    image: grafana/loki:latest
-    ports:
-      - 3100:3100
-    networks:
-      - default
-      - proxy_bridge
-    healthcheck:
-      test: wget -q -O /dev/null http://loki:3100/ready || exit 1
-      start_period: 15s
-      interval: 30s
-      start_interval: 15s
-    volumes:
-      - loki_data:/loki
-      - ./metrics/configs/loki/loki-local-config.yml:/etc/loki/local-config.yaml
-    restart: unless-stopped
-
-  prometheus:
-    container_name: ucm_mc_prometheus
-    image: prom/prometheus:latest
-    ports:
-      - 9090:9090
-    networks:
-      - default
-      - proxy_bridge
-    healthcheck:
-      test: wget -q -O /dev/null http://prometheus:9090/api/v1/status/buildinfo || exit 1
-      start_period: 15s # old is 1m
-      interval: 30s
-      start_interval: 15s # 30s
-    volumes:
-      - prometheus_data:/prometheus
-      - ./metrics/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: unless-stopped
-
   haproxy:
     container_name: ucm_mc_haproxy
     image: haproxy:lts-alpine
@@ -228,9 +173,3 @@ services:
 networks:
   proxy_bridge:
     driver: bridge
-
-volumes:
-  alloy_data:
-  loki_data:
-  prometheus_data:
-  haproxy_data:

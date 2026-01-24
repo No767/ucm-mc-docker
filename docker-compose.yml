@@ -29,7 +29,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       PAPER_CHANNEL: "experimental"
-      MEMORY: "2048M"
+      MEMORY: "6144M"
       ICON: "/icon.png"
       OVERRIDE_ICON: "true"
 
@@ -111,9 +111,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: "3G"
+          memory: "6G"
         reservations:
-          memory: "2G"
+          memory: "4G"
     volumes:
       - "${DATA_LOCATION}:/data"
       - "./patches:/patches"

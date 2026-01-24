@@ -3,7 +3,7 @@ name: ucm_mc_docker_exporters
 services:
   cadvisor:
     container_name: ucm_mc_cadvisor
-    image: ghcr.io/google/cadvisor:v0.53.0
+    image: ghcr.io/google/cadvisor:latest
     ports:
       - 8080:8080
     privileged: true

@@ -149,28 +149,6 @@ services:
       - ./metrics/configs/mysql/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     restart: unless-stopped
 
-  haproxy:
-    container_name: ucm_mc_haproxy
-    image: haproxy:lts-alpine
-    ports:
-      - 80:80
-      - 443:443
-      - 8404:8404
-    networks:
-      - default
-      - proxy_bridge
-    healthcheck:
-      test: wget -q -O /dev/null http://haproxy:8404/metrics || exit 1
-      start_period: 15s
-      interval: 30s
-      start_interval: 15s
-    volumes:
-      - /etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem
-      - /etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem
-      - ./metrics/configs/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - ./metrics/configs/haproxy/hostnames.map:/usr/local/etc/haproxy/hostnames.map
-    restart: unless-stopped
-
 networks:
   proxy_bridge:
     driver: bridge

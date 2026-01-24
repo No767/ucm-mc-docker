@@ -67,6 +67,9 @@ services:
       - 80:80
       - 443:443
       - 8404:8404
+    environment:
+      LOKI_PASSWORD: ${LOKI_PASSWORD}
+      PROMETHEUS_PASSWORD: ${PROMETHEUS_PASSWORD}
     networks:
       - default
       - proxy_bridge
@@ -78,8 +81,8 @@ services:
     volumes:
       - /etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/loki-ucm-mc.mineced.org.pem
       - /etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem:/etc/ssl/ucm-mc-certs/prometheus-ucm-mc.mineced.org.pem
-      - ./metrics/configs/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - ./metrics/configs/haproxy/hostnames.map:/usr/local/etc/haproxy/hostnames.map
+      - ./configs/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./configs/haproxy/hostnames.map:/usr/local/etc/haproxy/hostnames.map
     restart: unless-stopped
 
 volumes:

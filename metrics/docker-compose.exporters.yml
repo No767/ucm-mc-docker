@@ -20,12 +20,17 @@ services:
   node_exporter:
     container_name: ucm_mc_node_exporter
     image: prom/node-exporter:latest
+    command: "--path.rootfs=/host"
     ports:
       - 9100:9100
     networks:
       - default
       - proxy_bridge
-    command: "--path.rootfs=/host"
+    healthcheck:
+      test: wget -q -O /dev/null http://node_exporter:9100/metrics || exit 1
+      start_period: 15s
+      interval: 30s
+      start_interval: 15s
     pid: host
     volumes:
       - "/:/host:ro,rslave"
@@ -34,6 +39,11 @@ services:
   mysql_exporter:
     container_name: ucm_mc_mysql_exporter
     image: prom/mysqld-exporter:latest
+    command: >
+      --mysqld.address=database:3306
+      --mysqld.username=${MARIADB_USER}
+    environment:
+      MYSQLD_EXPORTER_PASSWORD: ${MARIADB_PASSWORD}
     ports:
       - 9104:9104
     networks:
@@ -47,6 +57,4 @@ services:
       start_period: 15s
       interval: 30s
       start_interval: 15s
-    volumes:
-      - "./configs/mysql/mysql.cnf:/.my.cnf"
     restart: unless-stopped

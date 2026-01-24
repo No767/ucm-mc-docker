@@ -1,56 +1,66 @@
-name: ucm_mc_docker_exporters
+name: ucm_mc_docker_services
 
 services:
-  cadvisor:
-    container_name: ucm_mc_cadvisor
-    image: ghcr.io/google/cadvisor:v0.53.0
+  alloy:
+    container_name: ucm_mc_alloy
+    image: grafana/alloy:latest
+    command: >
+      run 
+      --server.http.listen-addr=0.0.0.0:12345 
+      --storage.path=/var/lib/alloy/data 
+      /etc/alloy/config.alloy
     ports:
-      - 8080:8080
-    privileged: true
-    devices:
-      - "/dev/kmsg"
-    volumes:
-      - "/:/rootfs:ro"
-      - "/var/run:/var/run:ro"
-      - "/sys:/sys:ro"
-      - "/var/lib/docker/:/var/lib/docker:ro"
-      - "/dev/disk/:/dev/disk:ro"
-    restart: unless-stopped
-
-  node_exporter:
-    container_name: ucm_mc_node_exporter
-    image: prom/node-exporter:latest
-    ports:
-      - 9100:9100
-    networks:
-      - default
-      - proxy_bridge
-    command: "--path.rootfs=/host"
-    pid: host
-    volumes:
-      - "/:/host:ro,rslave"
-    restart: unless-stopped
-
-  mysql_exporter:
-    container_name: ucm_mc_mysql_exporter
-    image: prom/mysqld-exporter:latest
-    ports:
-      - 9104:9104
+      - 12345:12345
     networks:
       - default
       - proxy_bridge
     depends_on:
-      database:
-        condition: service_healthy
+      loki:
+        condition: service_started
+        restart: true
+    volumes:
+      - alloy_data:/var/lib/alloy/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./configs/alloy/config.alloy:/etc/alloy/config.alloy
+    restart: unless-stopped
+
+  loki:
+    container_name: ucm_mc_loki
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+    networks:
+      - default
+      - proxy_bridge
     healthcheck:
-      test: wget -q -O /dev/null http://mysql_exporter:9104/metrics || exit 1
+      test: wget -q -O /dev/null http://loki:3100/ready || exit 1
       start_period: 15s
       interval: 30s
       start_interval: 15s
     volumes:
-      - "./configs/mysql/mysql.cnf:/.my.cnf"
+      - loki_data:/loki
+      - ./configs/loki/loki-local-config.yml:/etc/loki/local-config.yaml
     restart: unless-stopped
-    
+
+  prometheus:
+    container_name: ucm_mc_prometheus
+    image: prom/prometheus:latest
+    ports:
+      - 9090:9090
+    networks:
+      - default
+      - proxy_bridge
+    healthcheck:
+      test: wget -q -O /dev/null http://prometheus:9090/api/v1/status/buildinfo || exit 1
+      start_period: 15s # old is 1m
+      interval: 30s
+      start_interval: 15s # 30s
+    volumes:
+      - prometheus_data:/prometheus
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
 
 volumes:
+  alloy_data:
+  loki_data:
   prometheus_data:

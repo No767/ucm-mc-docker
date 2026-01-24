@@ -1,7 +1,7 @@
 name: ucm_mc_docker
 
 include:
-  - path: metrics/docker-compose.metrics.yml
+  - path: metrics/docker-compose.services.yml
     project_directory: metrics
     env_file: .env
 

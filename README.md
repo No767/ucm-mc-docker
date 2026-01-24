@@ -24,8 +24,6 @@ Plugins utilized include:
 - [Bolt](<https://modrinth.com/plugin/bolt>)
 - [Terra](<https://modrinth.com/plugin/terra>)
 
-and support for server-side [Distant Horizons](<https://modrinth.com/mod/distanthorizons>) has been included through [Distant Horizons Support](<https://modrinth.com/plugin/distant-horizons-support>)
-
 ## License
 
 All Rights Reserved, 2025 - Present

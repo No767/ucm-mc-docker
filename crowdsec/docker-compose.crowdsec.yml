@@ -1,0 +1,17 @@
+services:
+  crowdsec:
+    container_name: ucm_mc_crowdsec
+    image: crowdsecurity/crowdsec:latest-debian
+    ports:
+      - 8080:8080
+    environment:
+      COLLECTIONS: "crowdsecurity/nginx"
+      GID: "${GID-1000}"
+    depends_on:
+      - "reverse-proxy"
+    volumes:
+      - ./config/acquis.d:/etc/crowdsec/acquis.d
+      - ./config:/etc/crowdsec/
+      - logs:/var/log/nginx
+      - crowdsec-db:/var/lib/crowdsec/data/
+    restart: always
